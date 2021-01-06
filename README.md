@@ -1,18 +1,16 @@
 #テーブル設計
 
 ## users テーブル
-| Column            | Type    | Options                   |
-| ----------------- | ------- | ------------------------- |
-| nickname          | string  | null: false               |
-| email             | string  | null: false, unique: true |
-| password          | string  | null: false               |
-| family_name       | string  | null: false               |
-| first_name        | string  | null: false               |
-| family_name_kana  | string  | null: false               |
-| first_name_kana   | string  | null: false               |
-| birthyear_id      | integer | null: false               |
-| birthmonth_id     | integer | null: false               |
-| birthday_id       | integer | null: false               |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| family_name        | string  | null: false               |
+| first_name         | string  | null: false               |
+| family_name_kana   | string  | null: false               |
+| first_name_kana    | string  | null: false               |
+| birthday_id        | date    | null: false               |
 
 ### Association
 - has_many :items
@@ -23,13 +21,13 @@
 | --------------- | ---------- | ------------------------------ |
 | name            | string     | null: false                    |
 | detail          | text       | null: false                    |
-| category_id     | string     | null: false                    |
-| status_id       | string     | null: false                    |
-| fare_id         | string     | null: false                    |
-| province_id     | string     | null: false                    |
-| shipment_day_id | string     | null: false                    |
+| category_id     | integer    | null: false                    |
+| status_id       | integer    | null: false                    |
+| fare_id         | integer    | null: false                    |
+| province_id     | integer    | null: false                    |
+| shipment_day_id | integer    | null: false                    |
 | price           | integer    | null: false                    |
-| user            | references | null: false, foreign_key: true |
+| user_id         | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -38,8 +36,8 @@
 ## purchases テーブル
 | Column       | Type       | Options                        | 
 | ------------ | ---------- | ------------------------------ |
-| user         | references | null: false, foreign_key: true |
-| item         | references | null: false, foreign_key: true |
+| user_id      | references | null: false, foreign_key: true |
+| item_id      | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -49,12 +47,12 @@
 ## addresses テーブル
 | Column       | Type       | Options                        | 
 | ------------ | ---------- | ------------------------------ |
-| postal_code  | integer    | null: false                    |
-| province_id  | string     | null: false                    |
+| postal_code  | string     | null: false                    |
+| province_id  | integer    | null: false                    |
 | city         | string     | null: false                    |
 | address_line | string     | null: false                    |
 | building     | string     |                                |
-| phone_num    | integer    | null: false                    |
+| phone_num    | string     | null: false                    |
 
 ### Association
 - belongs_to :purchase
